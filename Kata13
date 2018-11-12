@@ -1,0 +1,32 @@
+A)-------------------------------------------------------------------------------------------
+
+B)-------------------------------------------------------------------------------------------
+from sympy import *
+import matplotlib.pyplot as plt
+import numpy as np
+
+x=[1950,1960,1970,1980,1990,2000]
+y=[123500,131200,150700,141300,203200,240500]
+pL=''
+for k in range(len(x)):
+    pL+=str(y[k])+'* ('
+    Lxk=1
+    for j in range(len(x)-1):
+        if(i==j):
+            continue
+        pL+='(x-%f)*'%(x[j])
+        Lxk*=x[k]-x[j]
+    pL=pL[:-1]+'/%f)+'%(x[j])
+pL=pL[:-1]
+expr=sympify(pL)
+print(expand(pL))
+plt.plot(x,y,'ro')
+x2=np.linspace(1950,2000,100)
+y2=[]
+x=symbols('x')
+for i in range(len(x2)):
+    y2.append(expr.subs(x,x2[i]))
+plt.plot(x2,y2)
+
+0.885 seconds
+497.688442211055*x**5 - 4902231.1557789*x**4 + 19314541909.5477*x**3 - 38048667115577.9*x**2 + 3.74764885194452e+16*x - 1.476497550528e+19
